@@ -58,6 +58,31 @@ class List{
 
     }
 
+    int middleNode(){
+        Node* slow = head;
+        Node* fast = head;
+
+        while(slow != NULL && fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return slow->val;
+    }
+
+    bool isSorted(){
+        if(head == NULL)
+            return true;
+        Node* temp = head;
+        while(temp->next != NULL){
+            if(temp->val > temp->next->val )
+                return false;
+            temp = temp->next;
+        }
+
+        return true;
+    }
+
 };
 
 
@@ -71,9 +96,18 @@ int main() {
         l.pushBack(a);
     }
 
-    l.reverseList();
 
-    l.print();
+
+    //l.reverseList();
+
+    //l.print();
+    //cout<<l.middleNode()<<endl;
+
+    if(l.isSorted())
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
+    //cout<<l.isSorted()<<endl;
 
     return 0;
 }
