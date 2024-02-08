@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 // Input : 1 2 4 -1 -1 5 7 -1 -1 -1 3 -1 6 -1 -1
 
@@ -54,6 +55,35 @@ void printPostorder(Node* root){
     cout<<root->data<<", ";
 }
 
+void printLeveorder(Node* root){
+    if(root == NULL){
+        return;
+    }  
+    queue<Node*> qu;
+    qu.push(root);  
+    qu.push(NULL);
+
+    while(!qu.empty()){
+        Node *node = qu.front();
+        qu.pop();
+        if(node != NULL){
+            cout<<node->data<<", ";
+            if(node->left != NULL){
+                qu.push(node->left);
+            }
+            if(node->right != NULL){
+                qu.push(node->right);
+            }
+        } else {
+            cout<<endl;
+            if(!qu.empty()){
+                qu.push(NULL);
+            }
+        }
+    }
+   
+}
+
 int main(){
    Node* root = buildTree();
    printPreorder(root);
@@ -62,5 +92,6 @@ int main(){
    cout<<endl;
    printPostorder(root);
    cout<<endl;
+   printLeveorder(root);
     return 0;
 }
