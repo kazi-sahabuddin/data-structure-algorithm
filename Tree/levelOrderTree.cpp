@@ -79,7 +79,7 @@ int height(Node *root){
 
     return 1 + max(h1,h2);
 }
-
+// O(n^2)
 int diameter(Node* root){
     if(root == NULL){
         return 0;
@@ -91,6 +91,17 @@ int diameter(Node* root){
 
     return max(d1,max(d2,d3));
 }
+//O(n)
+int optDiameter(Node *root, int &ans){
+    if(root == NULL){
+        return 0;
+    }
+    int h1 = optDiameter(root->left, ans);
+    int h2 = optDiameter(root->right, ans);
+    ans = max(ans, h1+h2);
+
+    return 1 + max(h1,h2);
+}
 
 int main(){
    Node* root = levelOrderBuildTree();
@@ -99,5 +110,9 @@ int main(){
    cout<<endl;
    cout<<height(root)<<endl;
    cout<<diameter(root)<<endl;
+   int ans =0;
+   optDiameter(root, ans);
+
+   cout<<ans<<endl;
     return 0;
 }
