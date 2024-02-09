@@ -67,13 +67,24 @@ void printLeveorder(Node* root){
                 qu.push(NULL);
             }
         }
+    }   
+}
+
+int height(Node *root){
+    if(root == NULL){
+        return 0;
     }
-   
+    int h1 = height(root->left);
+    int h2 = height(root->right);
+
+    return 1 + max(h1,h2);
 }
 
 int main(){
    Node* root = levelOrderBuildTree();
    cout<<endl;
    printLeveorder(root);
+   cout<<endl;
+   cout<<height(root)<<endl;
     return 0;
 }
