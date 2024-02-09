@@ -80,11 +80,24 @@ int height(Node *root){
     return 1 + max(h1,h2);
 }
 
+int diameter(Node* root){
+    if(root == NULL){
+        return 0;
+    }
+    
+    int d1 = height(root->left) + height(root->right);
+    int d2  = diameter(root->left);
+    int d3  = diameter(root->right);
+
+    return max(d1,max(d2,d3));
+}
+
 int main(){
    Node* root = levelOrderBuildTree();
    cout<<endl;
    printLeveorder(root);
    cout<<endl;
    cout<<height(root)<<endl;
+   cout<<diameter(root)<<endl;
     return 0;
 }
